@@ -6,7 +6,11 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        'mini-wallpaper': "url('../src/assets/images/mini-wallpaper')",
+        'mini-wallpaper': "url('../src/assets/images/mini-wallpaper.png')",
+      },
+      fontFamily: {
+        'lato': 'Lato, sans-serif',
+        'inter': 'Inter, sans-serif',
       }
     },
   },
