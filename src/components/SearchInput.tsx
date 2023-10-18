@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { ReactComponent as IconMagnify } from "../../assets/svgs/magnify.svg";
+import { ReactComponent as IconMagnify } from "../assets/svgs/magnify.svg";
 
 type SearchProps = {
   handleSearch: () => void;
@@ -24,7 +24,7 @@ const SearchInput = ({ handleSearch, setSearchQuery }: SearchProps) => {
           name="search"
           placeholder="Search for a movie"
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full text-xs sm:text-sm text-[#6B7280] leading-5 py-1.5 px-2 focus:ring-0"
+          className="w-full text-xs sm:text-sm text-[#6B7280] leading-5 py-1.5 px-2 focus:rounded-lg"
         />
       </span>
       <button
