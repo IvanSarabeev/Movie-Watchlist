@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import { IMovie } from "./models/model";
+import { IMovie, IMovieExtended } from "./models/model";
 import { fetchMovieData } from "./services/apiService";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import { ToastContainer, toast } from "react-toastify";
-// import "react-toastify/dist/ReactToastify.css";
 import Home from "./pages/Home";
-import MyWatchlist from "./pages/Watchlist";
+import Collection from "./pages/Collection";
 
 function App() {
-  const [movie, setMovie] = useState<IMovie[]>([]);
+  const [movie, setMovie] = useState<IMovieExtended[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [watchlist, setWatchlist] = useState<IMovie[]>([]);
+  const [watchlist, setWatchlist] = useState<IMovieExtended[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<IMovie>();
+  // const [removeMovie, setRemoveMovie] = useState<IMovieExtended[]>([]);
 
   const handleSearch = async () => {
     try {
@@ -29,10 +28,23 @@ function App() {
     }
   };
 
-  const handleAddToWatchlist = () => {
-    const addWatchlist = [...movie];
-    setWatchlist(addWatchlist);
+  const handleAddToWatchlist = (imdbID: string) => {
+    const selectedMovie = movie.find((item) => item.imdbID === imdbID);
+
+    if (selectedMovie) {
+      setWatchlist((prevWatchlist) => [...prevWatchlist, selectedMovie]);
+    } else {
+      return selectedMovie;
+    }
   };
+
+  // const removeFromCollection = (imdbIDToRemove: string) => {
+  //   const removedMovie = watchlist.filter(
+  //     (item) => item.imdbID !== imdbIDToRemove
+  //   );
+
+  //   setWatchlist(removedMovie);
+  // };
 
   return (
     <BrowserRouter>
@@ -48,16 +60,19 @@ function App() {
               handleAddToWatchlist={handleAddToWatchlist}
               selectedMovie={selectedMovie}
               setSelectedMovie={setSelectedMovie}
-              // notify={notify}
             />
           }
         />
         <Route
           path="/my-watchlist"
-          element={<MyWatchlist watchlist={watchlist} />}
+          element={
+            <Collection
+              watchlist={watchlist}
+              // removeFromCollection={removeFromCollection}
+            />
+          }
         />
       </Routes>
-      {/* <ToastContainer /> */}
     </BrowserRouter>
   );
 }

@@ -1,19 +1,22 @@
 import React, { useEffect, useRef, useState } from "react";
-import { IMovie } from "../models/model";
-import { IMovieExtended } from "../models/model";
+import { IMovie, IMovieExtended } from "../models/model";
 import { fetchMovieID } from "../services/apiService";
 import { ReactComponent as IconSpinner } from "../assets/svgs/spinner.svg";
 import AddWatchlist from "../components/AddWatchlist";
-import StarCount from "./StarCount";
+// import StarCount from "./StarCount";
 
 type MovieInfoProps = {
   imdbID: string;
   selectedMovie: IMovie;
   setSelectedMovie: React.Dispatch<React.SetStateAction<IMovie | undefined>>;
-  handleAddToWatchlist?: () => void;
+  handleAddToWatchlist: (imdbID: string) => void;
 };
 
-const MovieInfoCard = ({ imdbID, selectedMovie }: MovieInfoProps) => {
+const MovieInfoCard = ({
+  imdbID,
+  selectedMovie,
+  handleAddToWatchlist,
+}: MovieInfoProps) => {
   const [movieInfo, setMovieInfo] = useState<IMovieExtended | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -25,7 +28,6 @@ const MovieInfoCard = ({ imdbID, selectedMovie }: MovieInfoProps) => {
         setTimeout(async () => {
           try {
             const data = await fetchMovieID(imdbID);
-            // if(data.Search.Poster === "N/A"){}
             setMovieInfo(data);
             setIsLoading(false);
             console.log(data);
@@ -34,7 +36,7 @@ const MovieInfoCard = ({ imdbID, selectedMovie }: MovieInfoProps) => {
             setIsLoading(true);
             setMovieInfo(null);
           }
-        }, 1500);
+        }, 1000);
       };
 
       handleFetchMovieInfo();
@@ -44,7 +46,11 @@ const MovieInfoCard = ({ imdbID, selectedMovie }: MovieInfoProps) => {
     }
   }, [imdbID, selectedMovie]);
 
-  const totalStars = Math.round(10);
+  const handleAddToCollection = () => {
+    handleAddToWatchlist(imdbID);
+  };
+
+  // const totalStars = Math.round(10);
 
   return (
     <article
@@ -55,7 +61,7 @@ const MovieInfoCard = ({ imdbID, selectedMovie }: MovieInfoProps) => {
         <h3>Data is Loading..</h3>
       ) : (
         <>
-          {movieInfo ? (
+          {movieInfo && movieInfo.Poster !== "N/A" ? ( //Check if the poster is not "N/A"
             <>
               <div className="relative z-0 w-auto h-auto">
                 <img
@@ -63,31 +69,35 @@ const MovieInfoCard = ({ imdbID, selectedMovie }: MovieInfoProps) => {
                   className="relative w-fit h-80 lg:h-96 rounded-md lg:rounded-lg shadow-lg hover:shadow-xl transition-shadow object-contain md:object-cover aspect-auto"
                   alt={movieInfo?.Title}
                 />
-                <AddWatchlist movieInfo={movieInfo.Title} />
+                {/* <button onClick={handleAddToCollection}>Add to coll</button> */}
+                <AddWatchlist
+                  movieInfo={movieInfo.Title}
+                  handleAddToCollection={handleAddToCollection}
+                />
               </div>
               <article className="w-auto h-auto font-inter leading-6 font-medium tracking-normal text-left">
                 <h2 className="text-xl">
                   <b>Movie</b>: {movieInfo?.Title}
                 </h2>
                 <span className="inline-flex gap-x-2 items-center">
-                  <h3 className="">
+                  <h3>
                     <b>IMDB Rating</b>: {movieInfo?.imdbRating}
                   </h3>
-                  <StarCount totalStars={totalStars} />
+                  {/* <StarCount totalStars={totalStars} /> */}
                 </span>
-                <h4 className="">
+                <h4>
                   <b>Language</b>: {movieInfo?.Language}
                 </h4>
-                <h5 className="">
+                <h5>
                   <b>Release</b>: {movieInfo?.Released}
                 </h5>
-                <h5 className="">
+                <h5>
                   <b>Runtime</b>: {movieInfo?.Runtime}
                 </h5>
-                <h6 className="">
+                <h6>
                   <b>Genre</b>: {movieInfo?.Genre}
                 </h6>
-                <h6 className="">
+                <h6>
                   <b>Director</b>: {movieInfo?.Director}
                 </h6>
                 <p className="sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl font-lato text-base text-justify md:text-left tracking-wide leading-5 lg:leading-6">

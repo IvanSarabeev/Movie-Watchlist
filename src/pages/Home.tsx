@@ -12,7 +12,7 @@ type HomeProps = {
   setMovie: React.Dispatch<React.SetStateAction<any[]>>;
   handleSearch: () => void;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
-  handleAddToWatchlist: () => void;
+  handleAddToWatchlist: (imdbID: string) => void;
   selectedMovie: IMovie | undefined;
   setSelectedMovie: React.Dispatch<React.SetStateAction<IMovie | undefined>>;
 };
@@ -42,12 +42,10 @@ const Home = ({
       </header>
       <div className="z-10 flex items-center justify-center -mt-5 mx-auto">
         <SearchInput
-          // notify={notify}
           handleSearch={handleSearch}
           setSearchQuery={setSearchQuery}
         />
       </div>
-      {/**Selected Movies */}
       {selectedMovie ? (
         <MovieInfoCard
           imdbID={selectedMovie.imdbID}
@@ -63,9 +61,8 @@ const Home = ({
               <MovieList
                 key={index}
                 item={item}
-                // handleAddToWatchlist={handleAddToWatchlist}
-                setSelectedMovie={setSelectedMovie}
                 movie={movie}
+                setSelectedMovie={setSelectedMovie}
               />
             );
           })
