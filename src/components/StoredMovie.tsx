@@ -1,54 +1,39 @@
 import React from "react";
 import { IMovieExtended } from "../models/model";
-// import RemoveWatchlist from "./RemoveWatchlist";
+import RemoveItem from "./RemoveItem";
 
 type MyMoviesProps = {
   item: IMovieExtended;
-  // removeFromCollection: (imdbIDToRemove: string) => void;
+  removeItemFromCollection: (imdbID: string) => void;
 };
 
-const StoredMovie = ({ item }: MyMoviesProps) => {
+const StoredMovie = ({ item, removeItemFromCollection }: MyMoviesProps) => {
   return (
     <>
-      <div className="relative z-0 w-auto h-auto">
-        <img
-          src={item?.Poster}
-          className="relative w-fit h-80 lg:h-96 rounded-md lg:rounded-lg shadow-lg hover:shadow-xl transition-shadow object-contain md:object-cover aspect-auto"
-          alt={item?.Title}
-        />
-        {/* <RemoveWatchlist
-          item={item}
-          removeFromCollection={removeFromCollection}
-        /> */}
+      <div className="group h-auto w-72 flex flex-col gap-4 p-3 border-b-2 border-b-[#E5E7EB] shadow-xl transition-all ease-in-out duration-200 hover:scale-105 hover:shadow-2xl hover:rounded-lg cursor-pointer">
+        <div className="relative z-0">
+          <img
+            src={item?.Poster}
+            alt={item?.Title}
+            className="w-fit h-80 md:h-96 rounded-md object-contain md:object-cover aspect-auto group-hover:scale-100 group-hover:rounded-lg drop-shadow-md transition-all"
+          />
+          <RemoveItem
+            item={item}
+            removeItemFromCollection={removeItemFromCollection}
+          />
+        </div>
+        <article>
+          <span className="flex items-center justify-between">
+            <h3 className="text-lg font-inter font-medium text-black leading-5 truncate overflow-hidden">
+              {item.Title}
+            </h3>
+          </span>
+          <span className="flex items-center justify-between my-2">
+            <h4>Year: {item.Year}</h4>
+            <h5 className=" capitalize">Type: {item.Type}</h5>
+          </span>
+        </article>
       </div>
-      <article className="w-auto h-auto font-inter leading-6 font-medium tracking-normal text-left">
-        <h2 className="text-xl">
-          <b>Movie</b>: {item?.Title}
-        </h2>
-        <span className="inline-flex gap-x-2 items-center">
-          <h3>
-            <b>IMDB Rating</b>: {item?.imdbRating}
-          </h3>
-        </span>
-        <h4>
-          <b>Language</b>: {item?.Language}
-        </h4>
-        <h5>
-          <b>Release</b>: {item?.Released}
-        </h5>
-        <h5>
-          <b>Runtime</b>: {item?.Runtime}
-        </h5>
-        <h6>
-          <b>Genre</b>: {item?.Genre}
-        </h6>
-        <h6>
-          <b>Director</b>: {item?.Director}
-        </h6>
-        <p className="sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl font-lato text-base text-justify md:text-left tracking-wide leading-5 lg:leading-6">
-          <b>Plot</b>: {item?.Plot}
-        </p>
-      </article>
     </>
   );
 };

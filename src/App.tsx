@@ -10,7 +10,6 @@ function App() {
   const [searchQuery, setSearchQuery] = useState("");
   const [watchlist, setWatchlist] = useState<IMovieExtended[]>([]);
   const [selectedMovie, setSelectedMovie] = useState<IMovie>();
-  // const [removeMovie, setRemoveMovie] = useState<IMovieExtended[]>([]);
 
   const handleSearch = async () => {
     try {
@@ -33,18 +32,14 @@ function App() {
 
     if (selectedMovie) {
       setWatchlist((prevWatchlist) => [...prevWatchlist, selectedMovie]);
-    } else {
-      return selectedMovie;
     }
   };
 
-  // const removeFromCollection = (imdbIDToRemove: string) => {
-  //   const removedMovie = watchlist.filter(
-  //     (item) => item.imdbID !== imdbIDToRemove
-  //   );
+  const removeItemFromCollection = (imdbID: string) => {
+    const removedMovie = watchlist.filter((item) => item.imdbID !== imdbID);
 
-  //   setWatchlist(removedMovie);
-  // };
+    setWatchlist(removedMovie);
+  };
 
   return (
     <BrowserRouter>
@@ -68,7 +63,7 @@ function App() {
           element={
             <Collection
               watchlist={watchlist}
-              // removeFromCollection={removeFromCollection}
+              removeItemFromCollection={removeItemFromCollection}
             />
           }
         />

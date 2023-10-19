@@ -50,8 +50,6 @@ const MovieInfoCard = ({
     handleAddToWatchlist(imdbID);
   };
 
-  // const totalStars = Math.round(10);
-
   return (
     <article
       ref={divRef}
@@ -69,7 +67,6 @@ const MovieInfoCard = ({
                   className="relative w-fit h-80 lg:h-96 rounded-md lg:rounded-lg shadow-lg hover:shadow-xl transition-shadow object-contain md:object-cover aspect-auto"
                   alt={movieInfo?.Title}
                 />
-                {/* <button onClick={handleAddToCollection}>Add to coll</button> */}
                 <AddWatchlist
                   movieInfo={movieInfo.Title}
                   handleAddToCollection={handleAddToCollection}

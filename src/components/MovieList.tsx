@@ -8,14 +8,15 @@ type MovieListProps = {
 };
 
 const MovieList = ({ item, movie, setSelectedMovie }: MovieListProps) => {
+  const handleSelectedMovie = () => {
+    const selectedMovie = movie.find((movie) => movie.imdbID === item.imdbID);
+
+    setSelectedMovie(selectedMovie);
+  };
+
   return (
     <div
-      onClick={() => {
-        const selectedMovie = movie.find(
-          (movie) => movie.imdbID === item.imdbID
-        );
-        setSelectedMovie(selectedMovie);
-      }}
+      onClick={handleSelectedMovie}
       className="group h-auto w-72 flex flex-col gap-8 p-3 border-b-2 border-b-[#E5E7EB] shadow-xl transition-all ease-in-out duration-200 hover:scale-105 hover:shadow-2xl hover:rounded-lg cursor-pointer"
     >
       <img

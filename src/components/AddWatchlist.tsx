@@ -1,7 +1,7 @@
 import React, { useId } from "react";
+import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import { ReactComponent as IconCirclePlus } from "../assets/svgs/plus-circle.svg";
-import "react-toastify/dist/ReactToastify.css";
 
 type WatchListProps = {
   movieInfo: string;
@@ -19,6 +19,7 @@ const AddToWatchlist = ({
       toast.success(
         `You have added the film:\n ${movieInfo} to your collection!`,
         {
+          position: "bottom-right",
           toastId: customToastId,
           pauseOnHover: true,
           theme: "dark",
