@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { IMovie } from "../models/model";
 import { IMovieExtended } from "../models/model";
 import { fetchMovieID } from "../services/apiService";
-// import { ReactComponent as IconStar } from "../assets/svgs/star.svg";
+import { ReactComponent as IconSpinner } from "../assets/svgs/spinner.svg";
 import AddWatchlist from "../components/AddWatchlist";
 import StarCount from "./StarCount";
 
@@ -22,21 +22,24 @@ const MovieInfoCard = ({ imdbID, selectedMovie }: MovieInfoProps) => {
   useEffect(() => {
     if (selectedMovie) {
       const handleFetchMovieInfo = async () => {
-        try {
-          const data = await fetchMovieID(imdbID);
-          setMovieInfo(data);
-          setIsLoading(false);
-          console.log(data);
-        } catch (error) {
-          console.log(error);
-          setIsLoading(false);
-          setMovieInfo(null);
-        }
+        setTimeout(async () => {
+          try {
+            const data = await fetchMovieID(imdbID);
+            // if(data.Search.Poster === "N/A"){}
+            setMovieInfo(data);
+            setIsLoading(false);
+            console.log(data);
+          } catch (error) {
+            console.log(error);
+            setIsLoading(true);
+            setMovieInfo(null);
+          }
+        }, 1500);
       };
 
       handleFetchMovieInfo();
     } else {
-      setIsLoading(true);
+      setIsLoading(false);
       setMovieInfo(null);
     }
   }, [imdbID, selectedMovie]);
@@ -46,7 +49,7 @@ const MovieInfoCard = ({ imdbID, selectedMovie }: MovieInfoProps) => {
   return (
     <article
       ref={divRef}
-      className="w-auto gap-8 sm:gap-10 md:gap-12 lg:gap-14 flex flex-col lg:flex-row py-5 px-8 items-center justify-center border-b-gray-200 mx-auto"
+      className="w-auto gap-8 sm:gap-10 md:gap-12 lg:gap-14 flex flex-col md:flex-row py-5 px-8 items-center justify-center border-b-gray-200 mx-auto"
     >
       {isLoading ? (
         <h3>Data is Loading..</h3>
@@ -54,44 +57,49 @@ const MovieInfoCard = ({ imdbID, selectedMovie }: MovieInfoProps) => {
         <>
           {movieInfo ? (
             <>
-              <img
-                src={movieInfo?.Poster}
-                className="h-80 lg:h-96 w-fit rounded-lg object-cover aspect-auto"
-                alt={movieInfo?.Title}
-              />
-              <article className="group font-inter ">
-                <h2 className="">Movie: {movieInfo?.Title}</h2>
+              <div className="relative z-0 w-auto h-auto">
+                <img
+                  src={movieInfo?.Poster}
+                  className="relative w-fit h-80 lg:h-96 rounded-md lg:rounded-lg shadow-lg hover:shadow-xl transition-shadow object-contain md:object-cover aspect-auto"
+                  alt={movieInfo?.Title}
+                />
+                <AddWatchlist movieInfo={movieInfo.Title} />
+              </div>
+              <article className="w-auto h-auto font-inter leading-6 font-medium tracking-normal text-left">
+                <h2 className="text-xl">
+                  <b>Movie</b>: {movieInfo?.Title}
+                </h2>
                 <span className="inline-flex gap-x-2 items-center">
-                  <h3 className="">IMDB Rating: {movieInfo?.imdbRating}</h3>
+                  <h3 className="">
+                    <b>IMDB Rating</b>: {movieInfo?.imdbRating}
+                  </h3>
                   <StarCount totalStars={totalStars} />
-                  {/* <IconStar className="w-4 h-4 fill-yellow-300" /> */}
                 </span>
-                <h4 className="">Language: {movieInfo?.Language}</h4>
-                <h5 className="">Release: {movieInfo?.Released}</h5>
-                <h5 className="">Runtime: {movieInfo?.Runtime}</h5>
-                <h6 className="">Genre: {movieInfo?.Genre}</h6>
-                <h6 className="">Director: {movieInfo?.Director}</h6>
-                <p className="sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl font-lato text-base leading-5 text-[#6B7280] group-hover:text-black">
-                  <b className="text-black font-medium group-hover:text-[#6B7280]">
-                    Plot:
-                  </b>{" "}
-                  {movieInfo?.Plot}
-                </p>
-                <h5>
-                  Ratings{" "}
-                  {movieInfo?.Ratings.map((item, index) => (
-                    <h2 key={index}>{item?.Value}</h2>
-                  ))}
+                <h4 className="">
+                  <b>Language</b>: {movieInfo?.Language}
+                </h4>
+                <h5 className="">
+                  <b>Release</b>: {movieInfo?.Released}
                 </h5>
-
-                <span>
-                  {/* Add to your Watchlist */}
-                  <AddWatchlist />
-                </span>
+                <h5 className="">
+                  <b>Runtime</b>: {movieInfo?.Runtime}
+                </h5>
+                <h6 className="">
+                  <b>Genre</b>: {movieInfo?.Genre}
+                </h6>
+                <h6 className="">
+                  <b>Director</b>: {movieInfo?.Director}
+                </h6>
+                <p className="sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl font-lato text-base text-justify md:text-left tracking-wide leading-5 lg:leading-6">
+                  <b>Plot</b>: {movieInfo?.Plot}
+                </p>
               </article>
             </>
           ) : (
-            <h3>No movie info available.</h3>
+            <>
+              <h3>Loading Movie data.</h3>
+              <IconSpinner className="inline w-10 h-10 mr-2 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" />
+            </>
           )}
         </>
       )}

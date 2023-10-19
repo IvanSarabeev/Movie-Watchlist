@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { IMovie } from "./models/model";
 import { fetchMovieData } from "./services/apiService";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+// import { ToastContainer, toast } from "react-toastify";
+// import "react-toastify/dist/ReactToastify.css";
 import Home from "./pages/Home";
 import MyWatchlist from "./pages/Watchlist";
 
@@ -14,10 +16,15 @@ function App() {
   const handleSearch = async () => {
     try {
       const data = await fetchMovieData(searchQuery);
-      setMovie(data.Search || []);
-      setSelectedMovie(null || undefined);
+      if (data.Search && data.Search.length > 0) {
+        setMovie(data.Search);
+        setSelectedMovie(null || undefined);
+      } else {
+        setMovie([]);
+        setSelectedMovie(null || undefined);
+      }
       console.log(data);
-    } catch (error) {
+    } catch (error: unknown | any) {
       console.log(error);
     }
   };
@@ -41,6 +48,7 @@ function App() {
               handleAddToWatchlist={handleAddToWatchlist}
               selectedMovie={selectedMovie}
               setSelectedMovie={setSelectedMovie}
+              // notify={notify}
             />
           }
         />
@@ -49,6 +57,7 @@ function App() {
           element={<MyWatchlist watchlist={watchlist} />}
         />
       </Routes>
+      {/* <ToastContainer /> */}
     </BrowserRouter>
   );
 }

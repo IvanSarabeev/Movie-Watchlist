@@ -42,6 +42,7 @@ const Home = ({
       </header>
       <div className="z-10 flex items-center justify-center -mt-5 mx-auto">
         <SearchInput
+          // notify={notify}
           handleSearch={handleSearch}
           setSearchQuery={setSearchQuery}
         />
@@ -55,7 +56,7 @@ const Home = ({
           handleAddToWatchlist={handleAddToWatchlist}
         />
       ) : null}
-      <section className="h-auto w-full flex flex-wrap items-center justify-around mx-auto mt-16 mb-10">
+      <section className="h-auto w-full flex flex-wrap gap-y-4 md:gap-y-6 lg:gap-y-8 items-center justify-around mx-auto mt-16 mb-10">
         {movie.length > 0 ? (
           movie.map((item, index) => {
             return (

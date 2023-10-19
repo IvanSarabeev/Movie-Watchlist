@@ -4,6 +4,7 @@ import { ReactComponent as IconMagnify } from "../assets/svgs/magnify.svg";
 type SearchProps = {
   handleSearch: () => void;
   setSearchQuery: React.Dispatch<React.SetStateAction<string>>;
+  // notify: () => void;
 };
 
 const SearchInput = ({ handleSearch, setSearchQuery }: SearchProps) => {
@@ -24,13 +25,13 @@ const SearchInput = ({ handleSearch, setSearchQuery }: SearchProps) => {
           name="search"
           placeholder="Search for a movie"
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="w-full text-xs sm:text-sm text-[#6B7280] leading-5 py-1.5 px-2 focus:rounded-lg"
+          className="w-full text-xs sm:text-sm text-[#6B7280] leading-5 py-1.5 px-2 focus:rounded-lg selection:bg-slate-500 selection:text-white"
         />
       </span>
       <button
         type="button"
         onClick={handleSearch}
-        className="w-28 h-9 md:h-12 flex items-center justify-center py-2 pl-4 pr-2 text-xs sm:text-sm leading-5 rounded-tr-md rounded-br-md drop-shadow-md bg-white border-2 border-b-[#D1D5D8]"
+        className="w-28 h-9 md:h-12 flex items-center justify-center py-2 pl-4 pr-2 text-xs sm:text-sm leading-5 rounded-tr-md rounded-br-md drop-shadow-md bg-white border-2 border-b-[#D1D5D8] focus:bg-gradient-to-tr focus:border-0 hover:bg-gradient-to-tr from-slate-500 to-sky-400 hover:text-white transition-colors"
       >
         Search
       </button>
