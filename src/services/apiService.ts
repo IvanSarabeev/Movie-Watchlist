@@ -1,9 +1,11 @@
-const apiKey: string = "5792fa34";
+const apiKey = "5792fa34";
+
+const omdBaseUrl = "https://www.omdbapi.com/";
 
 export const fetchMovieData = async (searchQuery: string) => {
   const movieTitle = searchQuery?.replace(" ", "_").toLocaleLowerCase();
 
-  const URL: string = `http://www.omdbapi.com/?s=${movieTitle}&apikey=${apiKey}&count=10`;
+  const URL: string = `${omdBaseUrl}?s=${movieTitle}&apikey=${apiKey}&count=10`;
 
   try {
     const response = await fetch(URL);
@@ -25,7 +27,7 @@ export const fetchMovieData = async (searchQuery: string) => {
 export const fetchMovieID = async (searchQuery: string) => {
   const imdbID = searchQuery?.replace(" ", "_").toLocaleLowerCase();
 
-  const URL: string = `http://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}&count=1`;
+  const URL: string = `${omdBaseUrl}?i=${imdbID}&apikey=${apiKey}&count=1`;
 
   try {
     const response = await fetch(URL);
