@@ -16,12 +16,13 @@ const Collection = ({
   return (
     <main className="min-h-screen w-auto">
       <header className="z-0 h-52 w-auto font-inter flex items-center justify-around drop-shadow-xl bg-mini-wallpaper bg-black">
-        <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-extrabold leading-6 tracking-tighter">
+        <h2 className="text-white text-4xl md:text-5xl lg:text-6xl font-extrabold leading-6 tracking-tighter">
           My Watchlist
-        </h1>
+        </h2>
         <Link
           to="/"
-          className="text-white text-sm leading-5 inline-flex items-center gap-x-1"
+          className="text-white leading-5 inline-flex items-center gap-x-1 text-xs sm:text-sm md:text-base
+hover:underline hover:underline-offset-4"
         >
           Search for movies
         </Link>

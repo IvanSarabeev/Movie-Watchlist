@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Icon from "../assets/images/Icon.png";
 import { IMovie } from "../models/model";
 import { ReactComponent as IconFilm } from "../assets/svgs/film.svg";
@@ -26,6 +26,15 @@ const Home = ({
   selectedMovie,
   setSelectedMovie,
 }: HomeProps) => {
+  const [showResult, setShownResult] = useState<boolean>(false);
+
+  const handleResult = () => {
+    handleSearch();
+    const hasResult = movie.length > 0;
+
+    setShownResult(hasResult);
+  };
+
   return (
     <main className="min-h-screen w-auto">
       <header className="z-0 h-52 w-auto font-inter flex items-center justify-around drop-shadow-xl bg-mini-wallpaper bg-black">
@@ -34,15 +43,15 @@ const Home = ({
         </h1>
         <Link
           to="/my-watchlist"
-          className="text-white text-sm leading-5 inline-flex items-center gap-x-1"
+          className="text-white text-xs sm:text-sm md:text-base leading-5 inline-flex items-center gap-x-1 hover:underline hover:underline-offset-4"
         >
-          <IconFilm className="w-4 h-4" />
+          <IconFilm className="w-5 h-5" />
           My Watchlist
         </Link>
       </header>
       <div className="z-10 flex items-center justify-center -mt-5 mx-auto">
         <SearchInput
-          handleSearch={handleSearch}
+          handleSearch={handleResult}
           setSearchQuery={setSearchQuery}
         />
       </div>
@@ -54,8 +63,8 @@ const Home = ({
           handleAddToWatchlist={handleAddToWatchlist}
         />
       ) : null}
-      <section className="h-auto w-full flex flex-wrap gap-y-4 md:gap-y-6 lg:gap-y-8 items-center justify-around mx-auto mt-16 mb-10">
-        {movie.length > 0 ? (
+      <section className="-z-10 h-auto w-full flex flex-wrap gap-y-4 md:gap-y-6 lg:gap-y-8 items-center justify-around mx-auto mt-16 mb-10 bg-transparent">
+        {showResult ? (
           movie.map((item, index) => {
             return (
               <MovieList
@@ -74,8 +83,8 @@ const Home = ({
                 alt="film-icon"
                 className="w-16 h-14 object-contain aspect-square"
               />
-              <h2 className="font-inter text-lg text-[#DFDDDD] leading-5 mt-2">
-                Start exploring
+              <h2 className="font-inter text-xl text-slate-600 leading-5 mt-2">
+                {showResult ? "Movie not found" : "Start exploring"}
               </h2>
             </div>
           </>

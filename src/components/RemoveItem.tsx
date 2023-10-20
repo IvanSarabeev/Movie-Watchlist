@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useId } from "react";
 import "react-toastify/dist/ReactToastify.css";
+import { IMovieExtended } from "../models/model";
 import { ToastContainer, toast } from "react-toastify";
 import { ReactComponent as IconCircleMinus } from "../assets/svgs/minus-circle.svg";
-import { IMovieExtended } from "../models/model";
 
 type RemoveItemProps = {
   item: IMovieExtended;
@@ -10,14 +10,17 @@ type RemoveItemProps = {
 };
 
 const RemoveItem = ({ item, removeItemFromCollection }: RemoveItemProps) => {
-  const handleSuccses = () => {
-    const notify = () => {
-      toast.success(`You have removed ${item.Title} successfully.`);
-    };
+  const customToastId = useId();
 
+  const handleSuccses = () => {
     if (removeItemFromCollection) {
       removeItemFromCollection(item.imdbID);
-      notify();
+      toast.success(`You have removed ${item.Title} successfully.`, {
+        position: "bottom-right",
+        toastId: customToastId,
+        pauseOnHover: true,
+        theme: "light",
+      });
     }
   };
 

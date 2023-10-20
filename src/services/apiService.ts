@@ -25,7 +25,7 @@ export const fetchMovieData = async (searchQuery: string) => {
 export const fetchMovieID = async (searchQuery: string) => {
   const imdbID = searchQuery?.replace(" ", "_").toLocaleLowerCase();
 
-  const URL: string = `http://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}&count=10`;
+  const URL: string = `http://www.omdbapi.com/?i=${imdbID}&apikey=${apiKey}&count=1`;
 
   try {
     const response = await fetch(URL);

@@ -3,8 +3,8 @@ import { IMovie } from "../models/model";
 
 type MovieListProps = {
   item: IMovie;
-  setSelectedMovie: React.Dispatch<React.SetStateAction<IMovie | undefined>>;
   movie: IMovie[];
+  setSelectedMovie: React.Dispatch<React.SetStateAction<IMovie | undefined>>;
 };
 
 const MovieList = ({ item, movie, setSelectedMovie }: MovieListProps) => {
@@ -22,7 +22,7 @@ const MovieList = ({ item, movie, setSelectedMovie }: MovieListProps) => {
       <img
         src={item.Poster}
         alt={item.Title}
-        className="w-fit h-80 md:h-96 rounded-md object-contain md:object-cover aspect-auto group-hover:scale-100 group-hover:rounded-lg drop-shadow-md transition-all"
+        className="-z-10 w-fit h-80 md:h-96 rounded-md object-contain md:object-cover aspect-auto group-hover:scale-100 group-hover:rounded-lg drop-shadow-md transition-all"
       />
       <article>
         <span className="flex items-center justify-between">

@@ -1,6 +1,6 @@
 import React from "react";
-import { IMovieExtended } from "../models/model";
 import RemoveItem from "./RemoveItem";
+import { IMovieExtended } from "../models/model";
 
 type MyMoviesProps = {
   item: IMovieExtended;
@@ -10,7 +10,7 @@ type MyMoviesProps = {
 const StoredMovie = ({ item, removeItemFromCollection }: MyMoviesProps) => {
   return (
     <>
-      <div className="group h-auto w-72 flex flex-col gap-4 p-3 border-b-2 border-b-[#E5E7EB] shadow-xl transition-all ease-in-out duration-200 hover:scale-105 hover:shadow-2xl hover:rounded-lg cursor-pointer">
+      <div className="group h-auto w-72 flex flex-col gap-4 p-3 border-b-2 border-b-[#E5E7EB] shadow-xl transition-all ease-in-out duration-200 hover:scale-105 hover:shadow-2xl hover:rounded-lg">
         <div className="relative z-0">
           <img
             src={item?.Poster}

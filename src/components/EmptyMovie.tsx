@@ -17,9 +17,9 @@ const EmptyMovie = () => {
         </h2>
         <Link
           to="/"
-          className="inline-flex gap-x-2 text-base lg:text-lg items-center mt-2"
+          className="group inline-flex gap-x-2 text-base lg:text-lg items-center mt-2 hover:underline hover:underline-offset-4"
         >
-          <IconCircle className="w-4 h-4" />
+          <IconCircle className="w-6 h-6 group-hover:text-cyan-500" />
           Let's add some movies!
         </Link>
       </div>
