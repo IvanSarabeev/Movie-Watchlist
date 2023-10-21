@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import Icon from "../assets/images/Icon.png";
+import { Link } from "react-router-dom";
 import { IMovie } from "../models/model";
 import { ReactComponent as IconFilm } from "../assets/svgs/film.svg";
-import SearchInput from "../components/SearchInput";
+import Icon from "../assets/images/Icon.png";
 import MovieList from "../components/MovieList";
-import { Link } from "react-router-dom";
+import SearchInput from "../components/SearchInput";
 import MovieInfoCard from "../components/MovieInfoCard";
 
 type HomeProps = {
@@ -38,7 +38,7 @@ const Home = ({
   return (
     <main className="min-h-screen w-auto">
       <header className="z-0 h-52 w-auto font-inter flex items-center justify-around drop-shadow-xl bg-mini-wallpaper bg-black">
-        <h1 className="text-white text-4xl md:text-5xl lg:text-6xl font-extrabold leading-6 tracking-tighter">
+        <h1 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-6 tracking-tighter">
           Find your film
         </h1>
         <Link

@@ -29,9 +29,10 @@ const RemoveItem = ({ item, removeItemFromCollection }: RemoveItemProps) => {
       <button
         type="button"
         onClick={handleSuccses}
-        className="absolute top-[2.5%] right-[2.5%] hover:bg-gradient-to-tr from-slate-400 to-sky-800 hover:rounded-md hover:p-0.5 hover:text-white transition-all ease-in-out"
+        className="w-auto h-auto mr-0 flex hover:bg-gradient-to-tr from-slate-400 to-sky-800 hover:rounded-md hover:p-0.5 hover:text-white transition-all ease-in-out"
       >
-        <IconCircleMinus className="h-6 w-6 text-white" />
+        Remove
+        <IconCircleMinus className="h-6 w-6 text-slate-950 md:text-slate-300" />
       </button>
       <ToastContainer />
     </>

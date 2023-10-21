@@ -20,17 +20,17 @@ const SearchInput = ({ handleSearch, setSearchQuery }: SearchProps) => {
 
   return (
     <>
-      <span className="w-1/3 md:w-1/3 h-9 md:h-12 font-inter py-2 px-2 inline-flex gap-x-2 items-center rounded-tl-md rounded-bl-md border-2 border-[#D1D5D8] drop-shadow-md bg-white">
+      <span className="w-1/2 md:w-1/3 h-9 md:h-12 font-inter py-2 px-2 inline-flex gap-x-2 items-center rounded-tl-md rounded-bl-md border-2 border-[#D1D5D8] drop-shadow-md bg-white">
         <IconMagnify className="w-5 h-5" onClick={handleFocus} />
         <Input
           handleInputChange={handleInputChange}
-          cumstomClassName="w-full text-xs sm:text-sm text-[#6B7280] leading-5 py-1.5 px-2 focus:rounded-lg selection:bg-slate-500 selection:text-white"
+          cumstomClassName="w-full text-xs sm:text-sm md:text-base text-[#6B7280] leading-5 py-1.5 px-2 focus:rounded-lg selection:bg-slate-500 selection:text-white"
         />
       </span>
       <button
         type="button"
         onClick={handleSearch}
-        className="w-28 h-9 md:h-12 flex items-center justify-center py-2 pl-4 pr-2 text-xs sm:text-sm leading-5 rounded-tr-md rounded-br-md drop-shadow-md bg-white border-2 border-b-[#D1D5D8] focus:bg-gradient-to-tr focus:border-0 hover:bg-gradient-to-tr from-slate-500 to-sky-400 hover:text-white transition-colors"
+        className="w-28 h-9 md:h-12 flex items-center justify-center py-1.5 pl-2 pr-1.5 md:py-2 md:pl-4 md:pr-2 text-xs sm:text-sm leading-5 rounded-tr-md rounded-br-md drop-shadow-md bg-white border-2 border-b-[#D1D5D8] focus:bg-gradient-to-tr focus:border-0 hover:bg-gradient-to-tr from-slate-500 to-sky-400 hover:text-white transition-colors"
       >
         Search
       </button>

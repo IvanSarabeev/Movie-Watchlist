@@ -58,7 +58,7 @@ const MovieInfoCard = ({
   return (
     <article
       ref={divRef}
-      className="relative z-0 w-fit gap-8 sm:gap-10 md:gap-12 lg:gap-14 flex flex-col md:flex-row py-5 px-8 items-center justify-center border-b-gray-200 shadow-xl hover:shadow-2xl transition-shadow mt-4 mx-auto"
+      className="relative z-0 w-11/12 gap-8 sm:gap-10 md:gap-12 lg:gap-14 flex flex-col md:flex-row py-5 px-8 items-center justify-center border-b-gray-200 shadow-xl hover:shadow-2xl transition-shadow mt-4 mx-auto"
     >
       {isLoading ? (
         <h3>Data is Loading..</h3>
@@ -70,7 +70,7 @@ const MovieInfoCard = ({
                 disabled={btnClicked}
                 movieInfo={movieInfo.Title}
                 handleAddToCollection={handleAddToCollection}
-                customClassName="group w-auto h-auto absolute top-[8%] right-[2.5%] z-10 inline-flex gap-x-2 items-center justify-center text-white bg-gradient-to-tr from-slate-600 to-sky-800 hover:from-cyan-500 hover:to-indigo-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-2 transition-all"
+                customClassName="group w-auto h-auto absolute top-[6%] right-[8.5%] md:top-[8%] md:right-[2.5%] z-10 inline-flex gap-x-2 items-center justify-center text-white bg-gradient-to-tr from-slate-600 to-sky-800 hover:from-cyan-500 hover:to-indigo-900 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-2.5 py-1.5 text-center mr-2 transition-all"
               >
                 Add to
                 <IconBookmark className="h-4 w-4 group-hover:fill-yellow-300 text-slate-800" />
@@ -78,8 +78,9 @@ const MovieInfoCard = ({
               <div className="relative z-0 w-auto h-auto">
                 <img
                   src={movieInfo?.Poster}
-                  className="relative w-fit h-80 lg:h-96 rounded-md lg:rounded-lg shadow-lg hover:shadow-xl transition-shadow object-contain md:object-cover aspect-auto"
                   alt={movieInfo?.Title}
+                  loading="lazy"
+                  className="relative w-fit h-80 lg:h-96 rounded-md lg:rounded-lg shadow-lg hover:shadow-xl transition-shadow object-contain md:object-cover aspect-auto"
                 />
               </div>
               <article className="w-auto h-auto font-inter leading-6 font-medium tracking-normal text-left">

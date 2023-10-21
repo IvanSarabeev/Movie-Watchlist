@@ -12,6 +12,7 @@ const MovieList = ({ item, movie, setSelectedMovie }: MovieListProps) => {
     const selectedMovie = movie.find((movie) => movie.imdbID === item.imdbID);
 
     setSelectedMovie(selectedMovie);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
@@ -22,7 +23,8 @@ const MovieList = ({ item, movie, setSelectedMovie }: MovieListProps) => {
       <img
         src={item.Poster}
         alt={item.Title}
-        className="-z-10 w-fit h-80 md:h-96 rounded-md object-contain md:object-cover aspect-auto group-hover:scale-100 group-hover:rounded-lg drop-shadow-md transition-all"
+        loading="lazy"
+        className="-z-10 w-auto h-80 md:h-96 rounded-md object-contain md:object-cover aspect-auto group-hover:scale-100 group-hover:rounded-lg drop-shadow-2xl mx-auto transition-all"
       />
       <article>
         <span className="flex items-center justify-between">

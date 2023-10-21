@@ -16,7 +16,7 @@ const Collection = ({
   return (
     <main className="min-h-screen w-auto">
       <header className="z-0 h-52 w-auto font-inter flex items-center justify-around drop-shadow-xl bg-mini-wallpaper bg-black">
-        <h2 className="text-white text-4xl md:text-5xl lg:text-6xl font-extrabold leading-6 tracking-tighter">
+        <h2 className="text-white text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-6 tracking-tighter">
           My Watchlist
         </h2>
         <Link
@@ -27,7 +27,7 @@ hover:underline hover:underline-offset-4"
           Search for movies
         </Link>
       </header>
-      <section className="hh-auto w-full flex flex-wrap gap-y-4 md:gap-y-6 lg:gap-y-8 items-center justify-around mx-auto mt-16 mb-10">
+      <section className="h-auto w-full flex flex-wrap gap-y-4 md:gap-y-6 lg:gap-y-8 items-center justify-around mx-auto mt-16 mb-10">
         {watchlist.length > 0 ? (
           watchlist.map((item, index) => {
             return (
